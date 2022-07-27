@@ -15,6 +15,7 @@ from pathlib import Path
 
 import os
 
+"""API и KEY с хостинга"""
 API_KEY = os.environ.get('API_KEY')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
