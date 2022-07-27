@@ -1,0 +1,73 @@
+{% extends 'mainpart/index.html' %}
+
+{% load static %}
+
+{% block title %}AsteroidsNeoWs{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="asteroids__inner">
+                <div class="info_wrapper">
+                    <div class="neows_description" style="font-size: 25px; font-family: 'Roboto', sans-serif; ">
+                        <p>Поиск определенного астероида на основе его <strong>идентификатора малого тела</strong>.</p>
+                    </div>
+                    {% include "asteroid_neows_form.html"%}
+                </div>
+            {% if result %}
+                <div class="info_wrapper">
+                    <div class="neolookup_info" style="border: solid 3px black; margin-bottom: 5px; margin-top: 20px;
+                        font-size: 20px;">
+                        <div class="asteroids__inner-item-name">Название : {{ result.name }}</div>
+                        <div class="asteroids__inner-item-name">ID : {{ result.id }}</div>
+                    <p>Дата первого наблюдения: {{ result.orbital_data.first_observation_date }}<br>
+                    Дата последнего наблюдения: {{ result.orbital_data.last_observation_date }}</p>
+
+                    <p>Расчетный диаметр (в метрах): <br>
+                    Минимальный - {{ result.estimated_diameter.meters.estimated_diameter_min|floatformat:"-3" }}<br>
+                    Максимальный - {{ result.estimated_diameter.meters.estimated_diameter_max|floatformat:"-3" }}
+                    </p>
+                    {% if result.is_potentially_hazardous_asteroid == False %}
+                        <p>Потенциально опасный - НЕТ</p>
+                    {% else %}
+                        <p>Потенциально опасный - <strong style="color: red;">ДА</strong></p>
+                    {% endif %}
+                    <div class="asteroids__inner-item-name">Данные о близких сближениях:</div><br>
+
+                    <table class="table" style="margin: 0 auto; text-align: center; border: 1px solid; width: 100%;">
+
+                      <thead>
+                        <tr>
+                          <th>Дата</th>
+                          <th>Относительная скорость <strong>(км/ч)</strong></th>
+                          <th>Дистанция до земли <strong>(км)</strong></th>
+                          <th>Орбитальное тело</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {% for data in result.close_approach_data %}
+                            <tr>
+                                <td>{{ data.close_approach_date }}</td>
+                                <td>{{ data.relative_velocity.kilometers_per_hour|floatformat:"0" }}</td>
+                                <td>{{ data.miss_distance.kilometers|floatformat:"-2" }}</td>
+                                <td>{{ data.orbiting_body }}</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+
+                    </table>
+                    </div>
+                </div>
+
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

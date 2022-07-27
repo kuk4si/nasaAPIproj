@@ -1,0 +1,42 @@
+{% extends 'mainpart/index.html' %}
+
+{% load static %}
+
+{% block custom_css %}
+    {% get_static_prefix as STATIC_PREFIX %}
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/marsroverphotos.css" type="text/css">
+{% endblock %}
+
+{% block title %}Mars Rover Photos{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container">
+        <div class="asteroids__inner">
+            <div class="info_wrapper">
+                <div class="neows_description" style="font-size: 25px; font-family: 'Roboto', sans-serif; ">
+                    <p>Поиск снимков с Марса по дате.</p>
+                    <strong>Формат записи даты: ГГГГ-ММ-ДД (2016-06-03)</strong></p></div>
+                    {% include "asteroid_neows_form.html"%}
+                </div>
+                {% if result %}
+                    {% for obj in result.photos %}
+                        <p style="background-color: black;">ID :{{ obj.id }}</p>
+                        <img style="width: 100%;" src="{{ obj.img_src }}" alt="">
+                    {% endfor %}
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

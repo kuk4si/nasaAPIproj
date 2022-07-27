@@ -1,0 +1,71 @@
+{% extends 'mainpart/index.html' %}
+
+{% load static %}
+
+
+{% block title %}AsteroidsNeoWs{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="asteroids__inner">
+                <div class="info_wrapper" style="">
+                    <div class="neows_description" style="font-size: 25px; font-family: 'Roboto', sans-serif; ">
+                    <p><strong>NeoWs</strong> (Near Earth Object Web Service) - служба для получения информации об астероидах, сближающихся с Землей.
+                     С помощью NeoWs пользователь может искать астероиды на основе даты их ближайшего сближения с Землей.
+                    Сервис выводит список астероидов, которые сблизились с землей. Диапазон - 7 дней с даты введённого значения.<br><br>
+                    <strong>Формат записи даты: ГГГГ-ММ-ДД (2006-10-05)</strong></p></div>
+                    {% include "asteroid_neows_form.html"%}
+                </div>
+
+                {% if result %}
+                    {% for date, objects in result.items %}
+                    <div class="asteroids_dates" style="margin-bottom: 15px; font-size:35px; font-weight: 600; background-color: rgba(0, 0, 0, 0.9);
+                    text-align: center;">{{ date }}</div>
+                    {% for obj in objects %}
+                        <div class="asteroids__inner-item">
+                            <div class="asteroids__inner-item-up">
+                                <div class="asteroids__inner-item-name">
+                                    <div>Название:&nbsp </div>
+                                    <div>{{ obj.name }}</div>
+                                </div>
+                                <div class="asteroids__inner-item-id">
+                                    <div>ID:&nbsp </div>
+                                    <div>{{ obj.id }}</div>
+                                </div>
+                            </div>
+                            <div class="asteroids__inner-item-down">
+                                <div class="asteroids__inner-item-diam">
+                                    <div style="margin-bottom: 10px;">Расчетный диаметр (в метрах): &nbsp</div>
+                                    <div id="diam-min">
+                                        <div>Минимальный:&nbsp </div>
+                                        <div>{{ obj.estimated_diameter.meters.estimated_diameter_min|floatformat:"-3" }}</div>
+                                    </div>
+                                    <div id="diam-max">
+                                        <div>Максимальный:&nbsp </div>
+                                        <div>{{ obj.estimated_diameter.meters.estimated_diameter_max|floatformat:"-3" }}</div>
+                                    </div>
+                                </div>
+                                <div class="asteroids__inner-item-danger">
+                                    <div>Потенциально опасный:&nbsp </div>
+                                    {% if obj.is_potentially_hazardous_asteroid == False %}
+                                        <div class="danger" id="danger-no">Нет</div>
+                                    {% else %}
+                                        <div class="danger" id="danger-yes">ДА </div>
+                                    {% endif %}
+
+                                </div>
+                                <div class="asteroids__inner-item-distance">
+                                    <div>Расстояние до земли:&nbsp </div>
+                                    <div>{{ obj.close_approach_data.0.miss_distance.kilometers|floatformat:"-3" }} <strong>КМ</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

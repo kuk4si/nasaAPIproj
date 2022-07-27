@@ -1,0 +1,211 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: url(../images/spacebg.jpeg);
+    background-attachment: fixed;
+    height: 100%;
+    background-repeat: repeat;
+    background-size: cover;
+    color: var(--color-default);
+}
+
+html, body {height:100%;}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+:root {
+    --color-header: #080b27;
+    --color-default: #fff;
+}
+
+/* ---------------- HEADER ---------------- */
+
+header {
+    position: fixed;
+    z-index: 1;
+    color: var(--color-default);
+    width: 100%;
+    margin-bottom: 50px;
+    background-color: rgba(8,11,39, 1);
+}
+
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    color: var(--color-default);
+    text-decoration: none;
+    transition: 2s;
+}
+
+
+.nav-item {
+    font-size: 18px;
+    font-weight: 300;
+    margin-right: 20px;
+
+    display: inline-block;
+    
+    position: relative;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.nav-item:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    transform: scaleX(0);
+    background-color: var(--color-default);
+    transform-origin: bottom right;
+    transition: transform .4s ease-out;
+}
+
+.nav-item:hover:after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.nav-item:last-child {
+    margin-right: 0;
+}
+
+/* ---------------- CONTENT ---------------- */
+
+.content {
+    background: url(../images/spacebg.jpeg);
+    background-attachment: fixed;
+    height: 100%;
+    background-repeat: repeat;
+    background-size: cover;
+    color: var(--color-default);
+}
+
+.content__inner {
+
+    height: 100%;
+}
+
+.content__inner-text {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    padding: 8px;
+}
+
+.content-title {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.content-subtitle {
+    font-size: 20px;
+}
+
+/* ---------------- Asteroids ---------------- */
+
+.asteroids__inner {
+    padding-top: 150px;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.asteroids__inner-item {
+    border: 1px solid var(--color-default);
+    border-radius: 5px;
+
+    background-color: rgba(0, 0, 0, 0.8);
+
+    padding: 10px;
+
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 397px;
+
+}
+
+.asteroids__inner-item:last-child {
+    margin-bottom: 0px;
+}
+
+.asteroids__inner-filter {
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.asteroids__inner-item-name,
+.asteroids__inner-item-id {
+    font-size: 25px;
+    display: flex;
+}
+
+.asteroids__inner-item-up {
+
+    margin-bottom: 20px;
+}
+
+#diam-min,
+#diam-max,
+.asteroids__inner-item-danger,
+.asteroids__inner-item-distance {
+    display: flex;
+    align-items: center;
+}
+
+.asteroids__inner-item-danger,
+.asteroids__inner-item-distance {
+    margin-top: 5px;
+}
+
+.danger {
+    padding: 3px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#danger-yes {
+    background-color: red;
+    border-top: 1px solid red;
+}
+
+#danger-no {
+    background-color: green;
+    border-top: 1px solid green;
+}
+/* ---------------- ICONS ---------------- */
+
+header svg {
+    height: 100px;
+    width: 100px;
+}
+
+.info_wrapper{
+    border: 1px solid var(--color-default);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+}
